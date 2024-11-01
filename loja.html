@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Acessórios para Pets</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Dosis', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .left-column {
+            width: 30%;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .left-column h1 {
+            font-family: 'Cooper Black', sans-serif;
+            margin-bottom: 10px;
+            color: #d77d26; /* Laranja */
+        }
+
+        .promo-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .right-column {
+            width: 65%;
+            display: flex; /* Utiliza flexbox */
+            flex-wrap: wrap; /* Permite que os produtos quebrem para a próxima linha */
+            gap: 20px; /* Espaçamento entre os produtos */
+            justify-content: space-between; /* Distribui os produtos uniformemente */
+        }
+
+        .product {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            text-align: center;
+            width: 48%; /* Aumentando a largura dos produtos e permitindo espaço */
+            min-width: 250px; /* Garantindo uma largura mínima */
+            position: relative;
+        }
+
+        .slider {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .slide {
+            display: none; /* Esconde todos os slides por padrão */
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .slide.active {
+            display: block; /* Mostra apenas o slide ativo */
+        }
+
+        .size-select, .quantity, .color-select {
+            margin: 5px 0; /* Reduzido o espaçamento */
+        }
+
+        .size-select input[type="radio"], .color-select input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        .quantity-input {
+            width: 60px;
+            margin: 5px 0; /* Reduzido o espaçamento */
+        }
+
+        .price {
+            font-weight: bold;
+            color: #d77d26; /* Laranja */
+            margin: 5px 0; /* Reduzido o espaçamento */
+        }
+
+        .description {
+            color: #333; /* Preto */
+            margin: 5px 0; /* Reduzido o espaçamento */
+        }
+
+        .select-item {
+            margin: 5px 0; /* Margem para o botão de seleção */
+        }
+
+        .proceed-button {
+            background-color: #d77d26; /* Laranja */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-family: 'Dosis', sans-serif;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .proceed-button:hover {
+            background-color: #c15d20; /* Tom mais escuro de laranja */
+        }
+
+        .favorite-icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin-top: 5px; /* Reduzido o espaçamento */
+        }
+
+        .color-options {
+            display: flex;
+            justify-content: center;
+            margin-top: 5px; /* Margem para as opções de cores */
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #ccc;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .color-black {
+            background-color: black;
+        }
+
+        .color-pink {
+            background-color: pink;
+        }
+
+        .button-container {
+            text-align: center; /* Centraliza o botão */
+            margin-top: 20px; /* Margem para separação */
+            width: 100%;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1000;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-column">
+            <h1>Bem-vindo à nossa loja!</h1>
+            <p>Encontre os melhores acessórios para o seu pet. Nossas coleiras e pingentes são feitos com materiais de alta qualidade para garantir o conforto e segurança do seu amigo de quatro patas.</p>
+            <img src="assets/img/lojaimagem.jpg" alt="Imagem de Divulgação" class="promo-image">
+        </div>
+
+        <div class="right-column">
+            <div class="product">
+                <div class="slider">
+                    <img src="assets/img/coleira1.jpg" alt="Coleira Modelo 1" class="slide active" onclick="enlargeImage(this)">
+                    <img src="assets/img/coleira2.jpg" alt="Coleira Modelo 2" class="slide" onclick="enlargeImage(this)">
+                    <button class="prev" onclick="changeSlide(-1)">❮</button>
+                    <button class="next" onclick="changeSlide(1)">❯</button>
+                </div>
+                <p class="description">Coleira de alta qualidade para o seu pet.</p>
+                <p class="price">Preço: R$ 49,90</p>
+                <div class="size-select">
+                    <label>Tamanho:</label>
+                    <div>
+                        <input type="radio" id="size-p1" name="size1" value="p">
+                        <label for="size-p1">P</label>
+                        <input type="radio" id="size-m1" name="size1" value="m">
+                        <label for="size-m1">M</label>
+                        <input type="radio" id="size-g1" name="size1" value="g">
+                        <label for="size-g1">G</label>
+                    </div>
+                </div>
+                <div class="color-select">
+                    <label>Cor:</label>
+                    <div class="color-options">
+                        <div class="color-option color-black" title="Preto" onclick="selectColor('preto', this)"></div>
+                        <div class="color-option color-pink" title="Rosa" onclick="selectColor('rosa', this)"></div>
+                    </div>
+                </div>
+                <div class="quantity">
+                    <label>Quantidade:</label>
+                    <input type="number" class="quantity-input" min="1" value="1">
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="slider">
+                    <img src="assets/img/pingente1.jpg" alt="Pingente Modelo 1" class="slide active" onclick="enlargeImage(this)">
+                    <img src="assets/img/pingente2.jpg" alt="Pingente Modelo 2" class="slide" onclick="enlargeImage(this)">
+                    <button class="prev" onclick="changeSlide(-1)">❮</button>
+                    <button class="next" onclick="changeSlide(1)">❯</button>
+                </div>
+                <p class="description">Pingente durável e estiloso para seu amigo.</p>
+                <p class="price">Preço: R$ 49,90</p>
+                <div class="size-select">
+                    <label>Tamanho:</label>
+                    <div>
+                        <input type="radio" id="size-p2" name="size2" value="p">
+                        <label for="size-p2">P</label>
+                        <input type="radio" id="size-m2" name="size2" value="m">
+                        <label for="size-m2">M</label>
+                        <input type="radio" id="size-g2" name="size2" value="g">
+                        <label for="size-g2">G</label>
+                    </div>
+                </div>
+                <div class="color-select">
+                    <label>Cor:</label>
+                    <div class="color-options">
+                        <div class="color-option color-black" title="Preto" onclick="selectColor('preto', this)"></div>
+                        <div class="color-option color-pink" title="Rosa" onclick="selectColor('rosa', this)"></div>
+                    </div>
+                </div>
+                <div class="quantity">
+                    <label>Quantidade:</label>
+                    <input type="number" class="quantity-input" min="1" value="1">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+
+        function changeSlide(direction) {
+            const slides = document.querySelectorAll('.slider .slide');
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function enlargeImage(image) {
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.innerHTML = `<img src="${image.src}" alt="${image.alt}" style="max-width: 90%; max-height: 90%;">`;
+            modal.onclick = function() {
+                document.body.removeChild(modal);
+            };
+            document.body.appendChild(modal);
+        }
+
+        function selectColor(color, element) {
+            const selected = document.querySelector('.color-option.selected');
+            if (selected) {
+                selected.classList.remove('selected');
+            }
+            element.classList.add('selected');
+            console.log('Cor selecionada:', color);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pets Cadastrados</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Dosis', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        /* Header */
+        .header {
+            background-color: black;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .header img {
+            width: 50px;
+            margin-right: 15px;
+        }
+        .header h2 {
+            margin: 0;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #ff6600;
+            margin-bottom: 40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #ff6600;
+            color: white;
+        }
+        td {
+            color: #333;
+        }
+        .qr-code img {
+            width: 50px;
+            cursor: pointer;
+        }
+        button {
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        button:hover {
+            background-color: #e65c00;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .header img {
+                margin-bottom: 10px;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+            th, td {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+            .qr-code img {
+                width: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            th, td {
+                padding: 6px;
+                font-size: 0.8rem;
+            }
+            .qr-code img {
+                width: 30px;
+            }
+            button {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Estilo do Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .modal-content {
+            position: relative;
+            background-color: #fff;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header com imagem e título -->
+    <header class="header">
+        <img src="assets/img/seu-logo.png" alt="Logo">
+        <h2>Administrador</h2>
+    </header>
+
+    <div class="container">
+        <h1>PETS CADASTRADOS</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome do Pet</th>
+                    <th>Espécie</th>
+                    <th>Raça</th>
+                    <th>Idade</th>
+                    <th>Peso</th>
+                    <th>Sexo</th>
+                    <th>Cor Predominante</th>
+                    <th>Nome dos Tutores</th>
+                    <th>QR Code</th>
+                </tr>
+            </thead>
+            <tbody id="petsCadastrados">
+                <!-- As informações dos pets cadastrados serão inseridas aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal para exibir o QR Code ampliado -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>QR Code Ampliado</h3>
+            <img id="qrCodeAmpliado" src="" alt="QR Code" style="width: 200px;">
+        </div>
+    </div>
+
+    <script>
+        // Exemplo de pets cadastrados (normalmente essas informações seriam carregadas dinamicamente do backend)
+        const pets = [
+            {
+                nome: 'Rex',
+                especie: 'Cachorro',
+                raca: 'Labrador',
+                idade: '5 anos',
+                peso: '20kg',
+                sexo: 'Macho',
+                cor: '#FFF5C7',
+                tutores: 'João e Maria',
+                qrCode: 'assets/img/qrcode.png'
+            },
+            {
+                nome: 'Mia',
+                especie: 'Gato',
+                raca: 'Persa',
+                idade: '3 anos',
+                peso: '4kg',
+                sexo: 'Fêmea',
+                cor: '#E0E0E0',
+                tutores: 'Ana Silva',
+                qrCode: 'assets/img/qrcode.png'
+            },
+            {
+                nome: 'Bobby',
+                especie: 'Cachorro',
+                raca: 'Poodle',
+                idade: '2 anos',
+                peso: '6kg',
+                sexo: 'Macho',
+                cor: '#FFFFFF',
+                tutores: 'Carlos Souza',
+                qrCode: 'assets/img/qrcode.png'
+            },
+            {
+                nome: 'Luna',
+                especie: 'Gato',
+                raca: 'Siamês',
+                idade: '4 anos',
+                peso: '5kg',
+                sexo: 'Fêmea',
+                cor: '#F5F5DC',
+                tutores: 'Paula Mendes',
+                qrCode: 'assets/img/qrcode.png'
+            },
+            {
+                nome: 'Mel',
+                especie: 'Cachorro',
+                raca: 'Beagle',
+                idade: '6 anos',
+                peso: '15kg',
+                sexo: 'Fêmea',
+                cor: '#A52A2A',
+                tutores: 'Fernanda Lima',
+                qrCode: 'assets/img/qrcode.png'
+            },
+            {
+                nome: 'Pipoca',
+                especie: 'Gato',
+                raca: 'SRD',
+                idade: '3 anos',
+                peso: '4kg',
+                sexo: 'Fêmea',
+                cor: '#000000',
+                tutores: 'Lucas Oliveira',
+                qrCode: 'assets/img/qrcode.png'
+            },
+            // Adicione mais pets cadastrados aqui, se necessário
+        ];
+
+        // Função para preencher a tabela com os pets cadastrados
+        function carregarPets() {
+            const tbody = document.getElementById('petsCadastrados');
+            pets.forEach(pet => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${pet.nome}</td>
+                    <td>${pet.especie}</td>
+                    <td>${pet.raca}</td>
+                    <td>${pet.idade}</td>
+                    <td>${pet.peso}</td>
+                    <td>${pet.sexo}</td>
+                    <td style="background-color: ${pet.cor};"></td>
+                    <td>${pet.tutores}</td>
+                    <td class="qr-code"><img src="${pet.qrCode}" alt="QR Code ${pet.nome}" onclick="abrirModal('${pet.qrCode}')"></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Carregar pets ao carregar a página
+        window.onload = carregarPets;
+
+        // Função para abrir o modal com o QR Code ampliado
+        function abrirModal(qrCodeSrc) {
+            document.getElementById('qrCodeAmpliado').src = qrCodeSrc;
+            document.getElementById('qrModal').style.display = 'block';
+        }
+
+        // Fechar o modal ao clicar no 'x'
+        document.querySelector('.close').onclick = function() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+
+        // Fechar o modal ao clicar fora do conteúdo
+        window.onclick = function(event) {
+            const modal = document.getElementById('qrModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

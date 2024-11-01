@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Início - PetSave</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+    <script src="assets/js/cadastropet.js" defer></script>
+</head>
+<body>
+
+        <main>
+            <div class="container">
+                <div class="title-section" style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 50px; text-align: center;">
+                    <h2 style="font-family: 'Cooper', sans-serif; color: #ff6600; margin: 0 10px; font-size: 2rem;">CADASTRE</h2>
+                    <h2 style="font-family: 'Dosis', sans-serif; color: #000000; margin: 0 10px; font-size: 2rem;">O SEU</h2>
+                    <h2 style="font-family: 'Cooper', sans-serif; color: gray; margin: 0 10px; font-size: 2rem;">PET!</h2>
+                </div>
+                <br>
+                <div class="form-wrapper">
+                    <div class="form-column left-column">
+                        <form id="petForm">
+                            <div class="form-group">
+                                <label for="nome-pet">Nome do pet:</label>
+                                <input type="text" id="nome-pet" required placeholder="Digite o nome do pet">
+                            </div>
+                            <div class="form-group">
+                                <label>Espécie:</label>
+                                <div class="radio-group">
+                                    <label style="margin-right: 10px;"><input type="radio" name="especie" value="cachorro"> Cachorro</label>
+                                    <label style="margin-right: 10px;"><input type="radio" name="especie" value="gato"> Gato</label>
+                                    <label style="margin-right: 10px;"><input type="radio" name="especie" value="ave"> Ave</label>
+                                    <label style="margin-right: 10px;"><input type="radio" name="especie" value="coelho"> Coelho</label>
+                                    <label style="margin-right: 10px;"><input type="radio" name="especie" value="repteis"> Outro</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="raca">Raça do pet:</label>
+                                <input type="text" id="raca" required placeholder="Digite a raça do pet">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="idade">Idade:</label>
+                                    <input type="text" id="idade" required placeholder="Idade aproximada">
+                                </div>
+                                <div class="form-group">
+                                    <label for="peso">Peso:</label>
+                                    <input type="text" id="peso" required placeholder="Ex: 10kg">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="sexo">Sexo do pet:</label>
+                                    <select id="sexo" required>
+                                        <option value="" disabled selected>Selecione</option>
+                                        <option value="macho">Macho</option>
+                                        <option value="femea">Fêmea</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="porte">Porte do pet:</label>
+                                    <select id="porte" required>
+                                        <option value="" disabled selected>Selecione</option>
+                                        <option value="pequeno">Pequeno</option>
+                                        <option value="medio">Médio</option>
+                                        <option value="grande">Grande</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cor-predominante">Cor predominante do pet:</label>
+                                <input type="color" id="cor-predominante" name="cor-predominante" value="#fff5c7">
+                            </div>
+                        </form>
+                    </div>
+        
+                    <div class="form-column right-column">
+                        <form>
+                            <div class="form-group">
+                                <label for="tutor-nome">Nome dos tutores:</label>
+                                <input type="text" id="tutor-nome" required placeholder="Nome dos tutores">
+                            </div>
+                            <div class="form-group">
+                                <label for="contato-tutores">Contato dos tutores:</label>
+                                <input type="text" id="contato-tutores" required placeholder="Contato dos tutores">
+                            </div>
+                            <div class="form-group">
+                                <label for="informacoes">Informações sobre o pet:</label>
+                                <textarea id="informacoes" rows="3" required placeholder="Informações adicionais sobre o pet" style="height: 125px;"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="foto">Foto do pet:</label>
+                                <div class="file-input-wrapper">
+                                    <input type="file" id="foto" class="file-input" required onchange="updateFileName(this)">
+                                    <label for="foto" class="custom-file-input">Escolher arquivo</label>
+                                    <span id="file-name" class="file-name">Nenhum arquivo selecionado</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" name="termos" required> Eu concordo com os 
+                                    <a href="#" id="openModal">termos e responsabilidades</a>
+                                </label>
+                            </div>
+                            <button type="button" class="submit-btn" id="submitBtn">CADASTRAR PET</button>
+                        </form>
+                    </div>
+                </div>
+        
+                <!-- Modal Termos -->
+                <div id="termsModal" class="modal">
+                    <div class="modal-content" style="display: flex; flex-direction: column; align-items: center;">
+                        <span class="close">&times;</span>
+                        <h2>Termos de Uso</h2>
+                        <iframe src="termos.html" width="100%" height="500px" style="border:none;"></iframe>
+                    </div>
+                </div>
+        
+<!-- Modal de confirmação -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="confirmationContent">
+        <!-- O conteúdo de confirmação será atualizado aqui via JavaScript -->
+      </div>
+    </div>
+  </div>
+  
+        </main>
+      
+   
+        <style>
+
+            /* Estilos Gerais */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Dosis', sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    max-width: 800px; /* Definir uma largura máxima para o formulário */
+    margin: 0 auto; /* Centralizar o formulário na página */
+    font-family: 'Dosis', sans-serif;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 36px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Estilos do Formulário */
+.form-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-column {
+    flex: 1;
+    margin-right: 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.form-column:last-child {
+    margin-right: 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+/* Estilos dos Inputs e Textarea */
+label {
+    display: block;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+textarea,
+input[type="color"],
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-right: 152px;
+    min-width: 0px;
+    color: #555;
+}
+
+input[type="color"] {
+    width: 100%; /* Ajusta a largura para preencher o espaço disponível */
+    height: 60px; /* Aumenta a altura do seletor de cor */
+    border: 1px solid #ccc; /* Borda ao redor do seletor de cor */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    margin-top: 8px; /* Margem acima do seletor de cor */
+}
+
+textarea {
+    resize: none;
+}
+
+.radio-group {
+    display: flex; /* Usar flexbox para layout em linha */
+    flex-wrap: wrap; /* Permitir que as opções se movam para a próxima linha se necessário */
+    gap: 15px; /* Espaçamento entre os botões de opção */
+}
+
+.radio-group label {
+    display: flex; /* Permitir que o texto e o botão de opção se alinhem */
+    align-items: center; /* Alinhar o texto e o botão de opção verticalmente */
+    margin-right: 10px; /* Espaço à direita */
+    margin-bottom: 10px; /* Espaço abaixo */
+    display: inline-block; /* Para que a margem inferior funcione corretamente */
+}
+
+select {
+    background-color: #ffffff;
+    
+}
+
+/* Estilos do Botão de Arquivo */
+.file-input {
+    display: none; /* Esconde o input original */
+}
+
+.file-input-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.file-name {
+    margin-left: 10px; /* Espaçamento à esquerda do nome do arquivo */
+    font-size: 16px; /* Tamanho da fonte */
+    color: #555; /* Cor do texto */
+    font-family: 'Dosis', sans-serif;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="color"],
+input[type="file"],
+textarea,
+select {
+    font-family: 'Dosis', sans-serif;
+    font-size: 16px; /* Ajusta o tamanho da fonte se necessário */
+}
+
+
+.custom-file-input {
+    display: inline-block; /* Permite o ajuste do botão */
+    padding: 10px 20px; /* Espaçamento interno do botão */
+    font-size: 16px; /* Tamanho da fonte */
+    border: none; /* Remove borda padrão */
+    border-radius: 5px; /* Bordas arredondadas */
+    background-color: #000000; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    transition: background-color 0.3s; /* Transição suave */
+}
+
+.custom-file-input:hover {
+    background-color: #41403f; /* Cor do botão ao passar o mouse */
+}
+
+/* Estilo do Botão de Cadastro */
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Dosis', sans-serif; /* Aplicando a fonte Dosis */
+}
+
+.submit-btn:hover {
+    background-color: #ff8533;
+}
+
+/* Estilos para o Grupo de Botões de Radio */
+.radio-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fica na tela */
+    z-index: 1; /* Fica sobre outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Ativa rolagem se necessário */
+    background-color: rgb(0,0,0); /* Cor de fundo */
+    background-color: rgba(0,0,0,0.4); /* Fundo preto com opacidade */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% de margem do topo e centraliza */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largura do modal */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Estilos para o modal */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fixo na tela */
+    z-index: 1; /* Fica acima de outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Habilita rolagem se necessário */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centraliza o modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Largura do modal */
+    text-align: center;
+    border-radius: 10px; /* Cantos arredondados */
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.submit-btn, #goToStoreBtn {
+    background-color: #ff6600; /* Cor de fundo laranja */
+    color: white; /* Cor do texto */
+    border: none; /* Sem borda */
+    padding: 10px 20px; /* Padding */
+    text-align: center; /* Centraliza o texto */
+    text-decoration: none; /* Remove o underline */
+    display: inline-block; /* Permite definir largura e altura */
+    font-size: 16px; /* Tamanho da fonte */
+    margin: 4px 2px; /* Margem */
+    cursor: pointer; /* Muda o cursor para pointer */
+    border-radius: 5px; /* Cantos arredondados */
+    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+}
+.submit-btn:hover, #goToStoreBtn:hover {
+    background-color: #e55b00; /* Cor de fundo ao passar o mouse */
+}
+#qrCodeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+#qrCodeCanvas {
+    margin-top: 10px; /* Espaçamento acima do QR Code */
+    border: 5px solid #ff6600; /* Borda laranja */
+    border-radius: 10px; /* Cantos arredondados do QR Code */
+}
+
+    .nav-list {
+    display: flex; /* Exibe os itens da lista em linha */
+    justify-content: center; /* Centraliza os itens */
+    list-style: none; /* Remove os marcadores da lista */
+    padding: 10px; /* Adiciona preenchimento interno */
+    margin-top: -20px; /* Alinha os itens no centro vertical */
+}
+
+/* Adicione esta regra para remover margens e preenchimentos globais que podem estar afetando o layout */
+form {
+  font-family: 'Dosis', sans-serif;
+}
+
+.termos {
+  font-family: 'Dosis', sans-serif;
+}
+
+/* Definindo todas as fontes do formulário como Dosis em negrito */
+form, label, input, textarea, button {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+}
+
+/* Definindo as fontes dos rótulos e textos descritivos do formulário em preto */
+form, label {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    color: black; /* Define as fontes dos rótulos em preto */
+}
+
+/* Mantendo as fontes dos campos de preenchimento na cor padrão */
+input, textarea, select, button {
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    color: inherit; /* Mantém a cor atual dos campos de preenchimento */
+}    
+
+
+/* Estilo para o modal */
+.modal {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semitransparente */
+    justify-content: center;
+    align-items: center; /* Centraliza o modal verticalmente */
+}
+
+/* Estilo do conteúdo do modal */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px; /* Aumenta um pouco a largura do modal */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Fechar o modal */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+/* Estilos para os botões */
+.modal-links {
+    margin-top: 20px;
+}
+
+.modal-links .button {
+    background-color: #ff6600; /* Laranja */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.modal-links .button.secondary {
+    background-color: #000; /* Preto */
+}
+
+/* Hover para os botões */
+.modal-links .button:hover {
+    background-color: #e65c00; /* Hover laranja */
+}
+
+.modal-links .button.secondary:hover {
+    background-color: #333; /* Hover preto */
+}
+
+</style>
+<script>
+    function updateFileName(input) {
+        const fileName = input.files[0] ? input.files[0].name : 'Nenhum arquivo selecionado';
+        document.getElementById('file-name').innerText = fileName;
+    }
+
+    // Lógica para os modais
+    const termsModal = document.getElementById('termsModal');
+    const myModal = document.getElementById('myModal');
+    const openModalBtn = document.getElementById('openModal');
+    const closeModalBtns = document.querySelectorAll('.close');
+
+    openModalBtn.onclick = function() {
+        termsModal.style.display = 'flex';
+    }
+
+    closeModalBtns.forEach(btn => {
+        btn.onclick = function() {
+            termsModal.style.display = 'none';
+            myModal.style.display = 'none'; // Esconder o modal de confirmação ao fechar o modal de termos
+        }
+    });
+
+    document.getElementById('submitBtn').onclick = function() {
+        // Em vez de gerar QR Code, exibir a confirmação de cadastro
+        const qrCodeContainer = document.getElementById('qrCodeContainer'); // Você pode remover essa linha se não precisar mais do QR code
+        const qrCodeCanvas = document.getElementById('qrCodeCanvas'); // Você pode remover essa linha se não precisar mais do QR code
+
+        // Exibir modal de confirmação com a mensagem
+        const confirmationMessage = `
+            <h2>Cadastro Confirmado!</h2>
+            <p>O cadastro do seu pet foi concluído com sucesso.</p>
+            <div class="modal-links">
+              <a href="cadastropet.html" class="button">Concluir</a>
+              <a href="loja.html" class="button secondary">Ir para a Loja</a>
+            </div>
+        `;
+        
+        document.getElementById('confirmationContent').innerHTML = confirmationMessage; // Atualiza o conteúdo do modal de confirmação
+
+        myModal.style.display = 'flex'; // Exibir modal de confirmação
+    };
+
+    document.getElementById('submitBtn').addEventListener('click', function() {
+       
+       if (nomePet && especie && raca && idade && peso && sexo && porte && tutorNome && contatoTutores && informacoes) {
+           // Gera o QR Code
+           const qr = new QRious({
+               element: document.getElementById('qrCodeCanvas'),
+               value: `Nome do Pet: ${nomePet}\nEspécie: ${especie}\nRaça: ${raca}\nIdade: ${idade}\nPeso: ${peso}\nSexo: ${sexo}\nPorte: ${porte}\nCor: ${corPredominante}\nTutor: ${tutorNome}\nContato: ${contatoTutores}\nInformações: ${informacoes}`,
+               size: 200 // Tamanho do QR Code
+           });
+   
+           // Exibe o modal
+           const modal = document.getElementById('myModal');
+           modal.style.display = "block";
+       } else {
+           alert("Por favor, preencha todos os campos.");
+       }
+   });
+   
+   // Evento para fechar o modal
+   document.querySelector('.close').addEventListener('click', function() {
+       document.getElementById('myModal').style.display = "none";
+   });
+   
+   // Evento para ir para a loja
+   document.getElementById('goToStoreBtn').addEventListener('click', function() {
+       window.location.href = "loja.html"; // Substitua com a URL da loja
+   });
+   
+   // Fechar o modal ao clicar fora dele
+   window.addEventListener('click', function(event) {
+       const modal = document.getElementById('myModal');
+       if (event.target === modal) {
+           modal.style.display = "none";
+       }
+   });
+   
+   // Obter o modal
+   var modal = document.getElementById("termsModal");
+   
+   // Obter o link que abre o modal
+   var btn = document.getElementById("openModal");
+   
+   // Obter o elemento <span> que fecha o modal
+   var span = document.getElementsByClassName("close")[0];
+   
+   // Quando o usuário clica no link, abre o modal
+   btn.onclick = function() {
+   modal.style.display = "block";
+   }
+   
+   // Quando o usuário clica em <span> (x), fecha o modal
+   span.onclick = function() {
+   modal.style.display = "none";
+   }
+   
+   // Quando o usuário clica fora do modal, fecha
+   window.onclick = function(event) {
+   if (event.target == modal) {
+   modal.style.display = "none";
+   }
+   }
+
+   
+   
+</script>
+
+</body>
+</html>

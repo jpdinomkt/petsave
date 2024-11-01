@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="assets/css/footer.css">
+
+    <title>Responsive Footer</title>
+</head>
+<body>
+    <main>
+        <!-- Área principal da página -->
+    </main>
+    
+    <footer>
+        <div id="footer-section">
+            <div id="social-section">
+                <h3>Nossas Redes Sociais</h3>
+                <div id="social-icons">
+                    <a href="https://api.whatsapp.com/send?phone=5515992595070" class="social-link" id="whatsapp-icon" target="_blank" aria-label="WhatsApp">
+                        <img src="assets/img/iconewa.png" alt="Ícone do WhatsApp" style="width: 40px; height: 40px;">
+                    </a>
+                    <a href="https://www.instagram.com/petsaveoficial/" class="social-link" id="instagram-icon" target="_blank" aria-label="Instagram">
+                        <img src="assets/img/iconeig.png" alt="Ícone do Instagram" style="width: 40px; height: 40px;">
+                    </a>
+                    <a href="https://www.facebook.com/PetDelicia" class="social-link" id="facebook-icon" target="_blank" aria-label="Facebook">
+                        <img src="assets/img/iconefb.png" alt="Ícone do Facebook" style="width: 40px; height: 40px;">
+                    </a>
+                </div>
+            </div>
+            
+            <ul class="quick-links">
+                <li>
+                    <h3>Links Rápidos</h3>
+                </li>
+                <li>
+                    <a href="adocao.html" class="link">Adotar PET</a>
+                </li>
+                <li>
+                    <a href="#" id="cadastroPetLink" class="link">Cadastrar PET</a> <!-- Alterado -->
+                </li>
+            </ul> 
+
+            <ul class="useful-links">
+                <li>
+                    <h3>Links Úteis</h3>
+                </li>
+                <li>
+                    <a href="contato.html" class="link">Contato</a>
+                </li>
+                <li>
+                    <a href="termos.html" class="link">Nossos Termos</a>
+                </li>
+            </ul>
+
+            <div id="subscription-section">
+                <h3>Quero receber novidades</h3>
+                <div id="email-input-group">
+                    <input type="email" id="email" placeholder="Digite seu e-mail">
+                    <button class="subscribe-button">
+                        <i class="fa-regular fa-envelope"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="copyright-section">
+            &#169; PETSAVE 2024 - Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- Modal para informar login obrigatório -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Você precisa estar logado para cadastrar um pet!</h2>
+            <p>Por favor, faça login ou crie uma conta para continuar.</p>
+            <div class="modal-links">
+                <a href="login.html" class="button">Login</a>
+                <a href="cadastro.html" class="button secondary">Criar Conta</a>
+            </div>
+        </div>
+    </div>
+    <style>/* Estilo para o modal */
+        /* Estilo para o modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Fechar o modal */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+/* Título do modal */
+.modal-content h2 {
+    color: black; /* Título em preto */
+    margin-bottom: 10px; /* Espaçamento abaixo do título */
+}
+
+/* Subtítulo do modal */
+.modal-content p {
+    color: gray; /* Subtítulo em cinza */
+    margin-bottom: 20px; /* Afastamento do subtítulo dos botões */
+}
+
+/* Estilos dos botões */
+.modal-links .button {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 10px;
+    text-decoration: none;
+}
+
+.modal-links .button.secondary {
+    background-color: #000;
+}
+
+/* Hover dos botões */
+.modal-links .button:hover {
+    background-color: #e65c00;
+}
+
+.modal-links .button.secondary:hover {
+    background-color: #333;
+}
+
+        </style>
+        <script>// footer.js
+
+            // Verificar se o usuário está logado (simulação)
+            function isUserLoggedIn() {
+                // Aqui você pode verificar a autenticação, por exemplo, verificando um token ou cookie.
+                // No exemplo, estamos apenas simulando.
+                return false; // Simula que o usuário NÃO está logado
+            }
+            
+            // Abrir e fechar o modal
+            const cadastroPetLink = document.getElementById('cadastroPetLink');
+            const loginModal = document.getElementById('loginModal');
+            const closeModal = document.querySelector('.close');
+            
+            // Clique no link "Cadastrar PET"
+            cadastroPetLink.onclick = function(event) {
+                if (!isUserLoggedIn()) {
+                    event.preventDefault(); // Impede o redirecionamento
+                    loginModal.style.display = 'flex'; // Exibe o modal
+                } else {
+                    window.location.href = "cadastropet.html"; // Se estiver logado, redireciona
+                }
+            }
+            
+            // Fechar o modal
+            closeModal.onclick = function() {
+                loginModal.style.display = 'none';
+            }
+            
+            // Fechar o modal ao clicar fora do modal
+            window.onclick = function(event) {
+                if (event.target == loginModal) {
+                    loginModal.style.display = 'none';
+                }
+            }
+            </script>
+
+<script src="assets/js/footer.js"></script> <!-- Link do JavaScript -->
+</body>
+</html>

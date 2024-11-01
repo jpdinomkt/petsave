@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Área do Tutor - Gerencie seus Pets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/formpet.css">
+    <style>
+        body {
+            font-family: 'Dosis', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9; /* Cor de fundo suave */
+        }
+        header {
+            background-color: #ff6600; /* Cor de fundo do cabeçalho */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center; /* Centraliza verticalmente o conteúdo */
+            justify-content: center; /* Centraliza horizontalmente o conteúdo */
+        }
+        h1 {
+            margin: 0 5px; /* Margem reduzida para aproximar as imagens do título */
+            flex-grow: 1; /* Permite que o título ocupe o espaço restante */
+        }
+        .header-images {
+            display: flex;
+            align-items: center; /* Centraliza verticalmente as imagens */
+        }
+        .header-images img {
+            width: 40px; /* Ajuste o tamanho da imagem conforme necessário */
+            height: auto;
+            margin: 0 5px; /* Espaçamento entre as imagens */
+        }
+        .header-buttons {
+            display: flex;
+            justify-content: center; /* Alinha os botões ao centro */
+            margin: 20px 0; /* Margem em cima e embaixo dos botões */
+        }
+        .header-button {
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Dosis', sans-serif; /* Fonte Dosis nos botões */
+            font-weight: 600;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+        .button-cadastrar {
+            background-color: #ff6600; /* Fundo laranja */
+            color: white;
+        }
+        .button-cadastrar:hover {
+            background-color: #cc5200; /* Efeito hover */
+        }
+        .button-preto {
+            background-color: #000;
+            color: white;
+        }
+        .button-preto:hover {
+            background-color: #333; /* Efeito hover */
+        }
+        .button-cinza {
+            background-color: #ccc;
+            color: black;
+        }
+        .button-cinza:hover {
+            background-color: #aaa; /* Efeito hover */
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white; /* Fundo branco para seções */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+        h2 {
+            color: #333; /* Cor dos títulos das seções */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Linha de separação entre as linhas da tabela */
+        }
+        th {
+            background-color: #f2f2f2; /* Fundo das células de cabeçalho */
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333; /* Cor de fundo do rodapé */
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Estilos para o modal */
+.modal {
+    display: none; /* Modal começa oculto */
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.8); /* Fundo escuro com opacidade */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.modal-content {
+    max-width: 80%; /* Limita o tamanho da imagem */
+    max-height: 80%;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column; /* Muda a direção para coluna em telas menores */
+            }
+            .header-buttons {
+                flex-direction: column; /* Muda a direção dos botões para coluna */
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-images">
+            <a href="inicio.html">
+                <img src="assets/img/meupetsave.png" alt="Imagem Lateral Esquerda" style="cursor: pointer;"> <!-- Link para inicio.html -->
+            </a>
+        </div>
+        <h1>Área do Tutor - Gerencie seus Pets</h1>
+        <div class="header-images">
+            <a href="inicio.html" onclick="sair()">
+                <img src="assets/img/sair.png" alt="Imagem Lateral Direita" style="cursor: pointer;"> <!-- Botão sair -->
+            </a>
+        </div>
+    </header>
+    
+
+    <div class="header-buttons">
+        <button class="header-button button-cadastrar" onclick="cadastrarPet()">Cadastrar Novo Pet</button>
+        <button class="header-button button-preto" onclick="atualizarDados()">Atualizar Meus Dados</button>
+        <button class="header-button button-cinza" onclick="verHistorico()">Ver Meus Pets</button>
+    </div>
+
+    <section class="pet-list">
+        <h2>Meus Pets Registrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome do Pet</th>
+                    <th>QR Code</th>
+                    <th>Editar Informações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Exemplo de Pet registrado -->
+                <tr>
+                    <td>Rex</td>
+                    <td><img src="assets/img/qrcode.png" alt="QR Code Rex" class="qr-code" onclick="openModal('assets/img/qrcode.png')"></td>
+                    <td><button onclick="editarPet('Rex')">Editar</button></td>
+                </tr>
+                
+                <!-- Modal -->
+                <div id="qrModal" class="modal">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <img class="modal-content" id="qrModalImg">
+                </div>
+                
+                <!-- Adicionar mais pets aqui -->
+            </tbody>
+        </table>
+    </section>
+
+    <section class="historico">
+        <h2>Histórico de Adoção e Doações</h2>
+        <ul>
+            <li>Doação de ração para ONG X - 05/09/2024</li>
+            <li>Adoção de Bella - 12/08/2024</li>
+            <!-- Adicionar mais histórico aqui -->
+        </ul>
+    </section>
+
+    <footer>
+        <p>PETSAVE - Gerenciando seus pets com facilidade. Todos os direitos reservados © 2024</p>
+    </footer>
+
+    <script>
+        function cadastrarPet() {
+            // Redirecionar para a página de cadastro de pet
+            window.location.href = 'cadastropet.html';
+        }
+    
+        function atualizarDados() {
+            // Redirecionar para a página de atualização de dados
+            window.location.href = '#';
+        }
+    
+        function verHistorico() {
+            // Redirecionar para a página de histórico
+            window.location.href = '#';
+        }
+    
+        function editarPet(nomePet) {
+            // Redirecionar para a página de edição de pet com o nome do pet como parâmetro
+            window.location.href = `#?nome=${nomePet}`;
+        }
+    
+        function sair() {
+            // Exibe um pop-up avisando que o usuário foi deslogado
+            alert("Você foi deslogado.");
+            // Redirecionar para a página de login ou homepage
+            window.location.href = 'login.html'; // Altere para a página desejada
+        }
+
+        function openModal(imgSrc) {
+    var modal = document.getElementById("qrModal");
+    var modalImg = document.getElementById("qrModalImg");
+    modal.style.display = "flex"; // Exibe o modal como flex
+    modalImg.src = imgSrc; // Define a imagem do modal
+}
+
+function closeModal() {
+    var modal = document.getElementById("qrModal");
+    modal.style.display = "none"; // Oculta o modal
+}
+
+    </script>
+</body>
+</html>
